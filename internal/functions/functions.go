@@ -173,3 +173,5 @@ func ChooseOperation(name string) (func(int, int) int, bool) {
 	}
 	return nil, false
 }
+
+//added comment to check
