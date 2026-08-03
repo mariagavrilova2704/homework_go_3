@@ -174,7 +174,7 @@ make run-02_arrays
 
 ---
 
-## 03. Structs
+~~## 03. Structs~~
 
 Файл: `internal/structs/structs.go`
 
