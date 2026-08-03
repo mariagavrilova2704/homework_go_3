@@ -112,7 +112,7 @@ make run-01_errors
 
 ---
 
-## 02. Arrays
+~~## 02. Arrays~~
 
 Файл: `internal/arrays/arrays.go`
 
@@ -375,7 +375,7 @@ make run-05_slices
 
 ---
 
-## 06. Loops
+~~## 06. Loops~~
 
 Файл: `internal/loops/loops.go`
 
@@ -439,7 +439,7 @@ make run-06_loops
 
 ---
 
-## 07. Functions / Defer
+~~## 07. Functions / Defer~~
 
 Файл: `internal/functions/functions.go`
 

@@ -115,7 +115,7 @@ func CaptureDeferArgument() (result string) {
 	value := "first"
 	defer func(v string) {
 		result = v
-	}(value)
+	}(value) //без value будет возвращаться second
 	value = "second"
 	return value
 }
