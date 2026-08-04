@@ -14,7 +14,7 @@
 
 ---
 
-## 01. Errors
+**## 01. Errors - есть вопросы!**
 
 Файл: `internal/errors/errors.go`
 

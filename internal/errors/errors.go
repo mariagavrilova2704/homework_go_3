@@ -146,14 +146,23 @@ func FirstError(errs []error) error {
 //
 // TODO: nil-элементы не должны попадать в результат.
 func CountErrors(errs []error) int {
-	return 0
+	count := 0
+	for _, err := range errs {
+		if err != nil {
+			count++
+		}
+	}
+	return count
 }
 
 // 13. ErrorText возвращает текст ошибки.
 //
 // TODO: для nil верните пустую строку.
 func ErrorText(err error) string {
-	return ""
+	if err == nil {
+		return ""
+	}
+	return fmt.Sprintf("%v", err)
 }
 
 // 14. ValidateUser проверяет поля пользователя в порядке: name, email, age.
@@ -161,6 +170,15 @@ func ErrorText(err error) string {
 // TODO: пустые name и email считаются ошибкой обязательного поля,
 // age должен быть положительным. Верните только первую найденную ошибку.
 func ValidateUser(name, email string, age int) error {
+	if name == "" {
+		return errors.New("пустое имя")
+	}
+	if email == "" {
+		return errors.New("пустой email")
+	}
+	if age < 0 {
+		return errors.New("отрицательный возраст")
+	}
 	return nil
 }
 
@@ -169,5 +187,14 @@ func ValidateUser(name, email string, age int) error {
 // TODO: nil -> "none"; ErrNotFound в цепочке -> "not_found";
 // *FieldError -> "field:<имя поля>"; любая другая ошибка -> "other".
 func Classify(err error) string {
-	return ""
+	switch err {
+	case nil:
+		return "none"
+	case ErrNotFound:
+		return "not_found"
+	case &FieldError{}:
+		return "field:<имя поля>"
+	default:
+		return "other"
+	}
 }
