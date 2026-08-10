@@ -123,13 +123,12 @@ func PanicToError(fn func()) (err error) {
 func DeferBeforePanic() (events []string) {
 	defer func() {
 		events = append(events, "defer")
-		r := recover()
-		if r != nil {
+		if r := recover(); r != nil {
+			// Восстанавливаем выполнение
 		}
 	}()
 	events = append(events, "body")
 	panic("new panic")
-	return events
 }
 
 // 12. RecoverOutsideDefer вызывает recover в обычном коде.
