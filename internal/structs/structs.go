@@ -108,8 +108,7 @@ func ProductTotal(product Product, count int) int {
 // целочисленной арифметикой, название товара сохраняется.
 func ApplyDiscount(product Product, percent int) Product {
 	//product.Price = product.Price - (product.Price * percent / 100) -формула, которую я помню
-	discount := (product.Price*percent + 99) / 100 //формула, которую здесь необходимо было внести для прохождения теста
-	product.Price = product.Price - discount
+	product.Price = product.Price * (100 - percent) / 100
 	return product
 }
 

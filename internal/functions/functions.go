@@ -2,7 +2,6 @@ package functions
 
 import (
 	"errors"
-	"fmt"
 )
 
 type User struct {
@@ -126,10 +125,9 @@ func CaptureDeferArgument() (result string) {
 func ReadDeferredVariable() (result string) {
 	value := "first"
 	defer func() {
-		fmt.Println(value)
+		result = value
 	}()
 	value = "second"
-	result = value
 	return result
 }
 

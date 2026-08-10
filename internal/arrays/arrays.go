@@ -36,7 +36,7 @@ func SwapEdges(items [4]int) [4]int {
 // TODO: учтите все позиции массива.
 func SumThree(items [3]int) int {
 	sum := 0
-	for i, _ := range items {
+	for i := range items {
 		sum += items[i]
 	}
 	return sum
@@ -46,7 +46,7 @@ func SumThree(items [3]int) int {
 // TODO: используйте обычные правила целочисленного деления Go.
 func AverageFour(items [4]int) int {
 	sum := 0
-	for i, _ := range items {
+	for i := range items {
 		sum += items[i]
 	}
 	return sum / len(items)
@@ -118,11 +118,7 @@ func MaxFour(items [4]int) int {
 func MainDiagonalSum(matrix [3][3]int) int {
 	sum := 0
 	for i := 0; i < len(matrix); i++ {
-		for j := 0; j < len(matrix); j++ {
-			if i == j {
-				sum = sum + matrix[i][j]
-			}
-		}
+		sum += matrix[i][i]
 	}
 	return sum
 }
@@ -131,9 +127,11 @@ func MainDiagonalSum(matrix [3][3]int) int {
 // TODO: центральный элемент и середины сторон не учитываются.
 func CornersSum(matrix [3][3]int) int {
 	sum := 0
-	for i := 0; i < len(matrix); i += 2 {
-		for j := 0; j < len(matrix); j += 2 {
-			sum = sum + matrix[i][j]
+	rows := len(matrix)                        //получаем количество строк
+	cols := len(matrix[0])                     //получаем количество столбцов,matrix[0] - это первая строка
+	for i := 0; i < rows; i = i + (rows - 1) { //перебираем строки, увеличивая на количество строк - 1
+		for j := 0; j < cols; j = j + (cols - 1) { //перебираем столбцы
+			sum += matrix[i][j]
 		}
 	}
 	return sum

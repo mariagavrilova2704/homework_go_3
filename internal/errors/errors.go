@@ -62,10 +62,7 @@ func ValidatePositive(field string, value int) error {
 func ParseAge(raw string) (int, error) {
 	num, err := strconv.Atoi(raw)
 	if err != nil {
-		return 0, &FieldError{
-			Field:  "raw",
-			Reason: fmt.Sprintf("parse age: %v", err),
-		}
+		return 0, fmt.Errorf("parse age: %w", err)
 	}
 	return num, nil
 }
@@ -162,7 +159,7 @@ func ErrorText(err error) string {
 	if err == nil {
 		return ""
 	}
-	return fmt.Sprintf("%v", err)
+	return err.Error()
 }
 
 // 14. ValidateUser проверяет поля пользователя в порядке: name, email, age.
@@ -170,14 +167,17 @@ func ErrorText(err error) string {
 // TODO: пустые name и email считаются ошибкой обязательного поля,
 // age должен быть положительным. Верните только первую найденную ошибку.
 func ValidateUser(name, email string, age int) error {
-	if name == "" {
-		return errors.New("пустое имя")
+	err := RequireText("name", name)
+	if err != nil {
+		return err
 	}
-	if email == "" {
-		return errors.New("пустой email")
+	err = RequireText("email", email)
+	if err != nil {
+		return err
 	}
-	if age < 0 {
-		return errors.New("отрицательный возраст")
+	err = ValidatePositive("age", age)
+	if err != nil {
+		return err
 	}
 	return nil
 }
@@ -187,14 +187,15 @@ func ValidateUser(name, email string, age int) error {
 // TODO: nil -> "none"; ErrNotFound в цепочке -> "not_found";
 // *FieldError -> "field:<имя поля>"; любая другая ошибка -> "other".
 func Classify(err error) string {
-	switch err {
-	case nil:
+	if err == nil {
 		return "none"
-	case ErrNotFound:
-		return "not_found"
-	case &FieldError{}:
-		return "field:<имя поля>"
-	default:
-		return "other"
 	}
+	if errors.Is(err, ErrNotFound) {
+		return "not_found"
+	}
+	var myErr *FieldError
+	if errors.As(err, &myErr) {
+		return "field:" + myErr.Field
+	}
+	return "other"
 }

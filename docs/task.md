@@ -236,7 +236,7 @@ make run-03_structs
 
 ---
 
-## 04. New / Make
+~~## 04. New / Make~~
 
 Файл: `internal/newmake/newmake.go`
 
@@ -296,7 +296,7 @@ make run-04_new_make
 
 ---
 
-## 05. Slices
+~~## 05. Slices~~
 
 Файл: `internal/slices/slices.go`
 
@@ -497,7 +497,7 @@ make run-07_functions
 
 ---
 
-## 08. Panic / Recover
+~~## 08. Panic / Recover~~
 
 Файл: `internal/panics/panics.go`
 
@@ -557,7 +557,7 @@ make run-08_panics
 
 ---
 
-## 09. Общие задачи
+~~## 09. Общие задачи~~
 
 Файл: `internal/common/common.go`
 

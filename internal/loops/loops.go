@@ -79,7 +79,6 @@ func FirstNegative(items []int) (int, bool) {
 	for _, value := range items {
 		if value < 0 {
 			return value, true
-			break
 		}
 	}
 	return 0, false
@@ -91,10 +90,10 @@ func FirstNegative(items []int) (int, bool) {
 func SumWithoutZeros(items []int) int {
 	sum := 0
 	for _, item := range items {
-		sum = sum + item
 		if item == 0 {
 			continue
 		}
+		sum = sum + item
 	}
 	return sum
 }
